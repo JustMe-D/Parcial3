@@ -7,28 +7,30 @@ const created = async (data) => {
     const UserRole = await UserRole.create(data);
     return UserRole;
 }
-const Updated = async (id, data) => {
-    const UserRole = await UserRole.Update(data, {where: {id}});
+const Updated = async (user_id,role_id, data) => {
+    const UserRole = await UserRole.Update(data, {where: {user_id,role_id}});
     return UserRole;
 }
 const getAll = async () => {
     return await UserRole.findAll(
         {include: [
-            {model: User, as: 'User'}
+            {model: User, as: 'User'},
+            {model: Role, as: 'Role'}
         ]}
     );
 }
-const getById = async (id) => {
+const getById = async (user_id,role_id) => {
     return await UserRole.findOne(
-        {where: {id}},
+        {where: {user_id,role_id}},
         {include: [
-            {model: User, as: 'User'}
+            {model: User, as: 'User'},
+            {model: Role, as: 'Role'}
         ]}
     );
 }
 
-const deleted = async (id) => {
-    return await UserRole.destroy({where: {id}});
+const deleted = async (user_id,role_id) => {
+    return await UserRole.destroy({where: {user_id,role_id}});
 }
 
 module.exports = {
