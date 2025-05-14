@@ -1,4 +1,4 @@
-exports.success = function (req, res, message = "", status = 200) {
+exports.successResponse = function (req, res, message = "", status = 200) {
 res.status(status).json({
     ok: true,
     status: status,
@@ -6,7 +6,7 @@ res.status(status).json({
 });
 };
 
-exports.error = function (req, res, message = "Error Interno", status = 500) {
+exports.errorResponse = function (req, res, message = "Error Interno", status = 500) {
 res.status(status).json({
     ok: false,
     status: status,
