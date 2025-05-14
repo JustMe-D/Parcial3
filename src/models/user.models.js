@@ -1,6 +1,7 @@
-const { Sequelize, Model, DataTypes } = require("sequelize");
+const { DataTypes } = require("sequelize");
 const sequelize = require("../db/db");
-const Role = require("./role.model");
+const Auth = require("./auth.models");
+const userRole = require("./userRole.models");
 
 const User = sequelize.define(
 "User",
@@ -57,7 +58,31 @@ const User = sequelize.define(
         allowNull: true,
     },
 },
-{
-    timestamps: true,
-  }
+
 );
+
+User.hasOne(Auth, {
+    foreignKey: 'id',
+    sourceKey: 'id',
+    as: 'User',
+});
+
+Auth.belongsTo(User, {
+    foreignKey: 'id',
+    targetKey: 'id',
+    as: 'User',
+});
+
+User.hasMany(userRole, {
+    foreignKey: 'user_id',
+    sourceKey: 'id',
+    as: 'User',
+});
+
+userRole.belongsTo(User, {
+    foreignKey: 'user_id',
+    targetKey: 'id',
+    as: 'User',
+});
+
+module.exports = User;

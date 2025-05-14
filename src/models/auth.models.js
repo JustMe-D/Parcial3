@@ -1,4 +1,4 @@
-const { Sequelize, DataTypes } = require("sequelize");
+const {DataTypes } = require("sequelize");
 const sequelize = require("../db/db");
 
 const Auth = sequelize.define(
@@ -25,7 +25,7 @@ const Auth = sequelize.define(
         },
     },
     },
-{
-    timestamps: true,
-  }
+
 );
+
+module.exports = Auth;
