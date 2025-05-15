@@ -1,4 +1,5 @@
 const User = require("../models/user.models");
+const fs = require("fs");
 
 const created = async (data) => {
     await User.sync();
@@ -18,11 +19,29 @@ const getById = async (id) => {
 const deleted = async (id) => {
     return await User.destroy({ where: { id } });
 }
+const updateAvatar = async (id, file) => {
+    const user = await User.findOne({ where: { id } });
+    if (!user) {
+        throw new Error("Usuario no encontrado");
+    }
+    // Elimina el avatar anterior si existe
+    if (user.imagePath) {
+        fs.unlink(user.imagePath, (err) => {
+            if (err) console.error(err);
+        });
+    }
+    const imagePath = file.path;
+    const avatar = `http://localhost:3000/images/users/avatar/${file.filename}`;
+    await User.update({ avatar, imagePath }, { where: { id } });
+    return { avatar, imagePath };
+};
+
 
 module.exports = {
     created,
     Updated,
     getAll,
     getById,
-    deleted
+    deleted,
+    updateAvatar
 }
