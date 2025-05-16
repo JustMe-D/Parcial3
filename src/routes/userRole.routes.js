@@ -1,3 +1,5 @@
+const router = require("express").Router();
+const controller = require("../controllers/userRole.controller");
 
 router.get("/", controller.getAll);
 router.get("/:user_id/:role_id", controller.getById);

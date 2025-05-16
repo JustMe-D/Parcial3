@@ -1,6 +1,6 @@
 const {DataTypes } = require("sequelize");
 const sequelize = require("../db/db");
-const userRole = require("./userRole.models");
+
 
 const Role = sequelize.define(
 "Role",
@@ -21,20 +21,20 @@ const Role = sequelize.define(
     description: {
         type: DataTypes.TEXT,
         allowNull: true,
-    }
-},
+    },
+}
 
 );
-Role.hasMany(userRole, {
-    foreignKey: "role_id",
-    sourceKey: "id",
-    as: "Role",
-});
+// Role.hasMany(userRole, {
+//     foreignKey: "role_id",
+//     sourceKey: "id",
+//     as: "urRole",
+// });
 
-userRole.belongsTo(Role, {
-    foreignKey: "role_id",
-    targetKey: "id",
-    as: "Role",
-});
+// userRole.belongsTo(Role, {
+//     foreignKey: "role_id",
+//     targetKey: "id",
+//     as: "urRole",
+// });
 
 module.exports = Role;

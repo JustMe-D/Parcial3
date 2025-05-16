@@ -2,12 +2,12 @@ const Role = require("../models/role.models");
 
 const created = async (data) => {
     await Role.sync();
-    const Role = await Role.create(data);
-    return Role;
+    const role = await Role.create(data);
+    return role;
 }
 const Updated = async (id, data) => {
-    const Role = await Role.update(data, { where: { id } });
-    return Role;
+    const role = await Role.update(data, { where: { id } });
+    return role;
 }
 const getAll = async () => {
     return await Role.findAll();
