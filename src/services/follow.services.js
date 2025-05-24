@@ -7,8 +7,8 @@ const created = async (data) => {
     const follow = await Follow.create(data);
     return follow;
 }
-const Updated = async (id, data) => {
-    const follow = await Follow.update(data, { where: { id } });
+const Updated = async (follower_id, following_id, data) => {
+    const follow = await Follow.update(data, { where: { follower_id, following_id } });
     return follow;
 }
 const getAll = async () => {
@@ -20,9 +20,9 @@ const getAll = async () => {
         ] }
     );
 }
-const getById = async (id) => {
+const getById = async (follower_id, following_id ) => {
     return await Follow.findOne(
-        { where: { id } },
+        { where: { follower_id, following_id } },
         { include: [
             { model: User, as: 'uFollower' },
             { model: User, as: 'uFollowing' }
@@ -30,8 +30,8 @@ const getById = async (id) => {
 
     );
 }
-const deleted = async (id) => {
-    return await Follow.destroy({ where: { id } });
+const deleted = async (follower_id, following_id ) => {
+    return await Follow.destroy({ where: { follower_id, following_id } });
 }
 
 module.exports = {

@@ -1,7 +1,7 @@
 const router = require("express").Router();
-const controller = require("../controllers/user.controller");
+const controller = require("../controllers/post.controller");
 const multer = require("multer");
-const storage = require("../middleware/user-avatar.multer");
+const storage = require("../middleware/post-image.multer");
 
 const uploader = multer({ storage });
 
@@ -12,9 +12,9 @@ router.put("/:id", controller.update);
 router.delete("/:id", controller.remove);
 
 router.post(
-    "/images/avatar/:id",
-    [uploader.single("avatar")],
-    controller.uploadAvatar
+    "/images/posts/:id",
+    uploader.single("image"),
+    controller.uploadImage
 );
 
 module.exports = router;

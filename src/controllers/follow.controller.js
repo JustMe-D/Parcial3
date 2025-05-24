@@ -21,7 +21,8 @@ const getAll = async (req, res) => {
 
 const getById = async (req, res) => {
     try {
-        const follow = await followService.getById(req.params.id);
+        const { follower_id, following_id } = req.params;
+        const follow = await followService.getById(follower_id, following_id);
         if (!follow) {
             return errorResponse(req, res, "Seguidor no encontrado", 404);
         }
@@ -33,7 +34,8 @@ const getById = async (req, res) => {
 
 const update = async (req, res) => {
     try {
-        const follow = await followService.Updated(req.params.id, req.body);
+        const { follower_id, following_id } = req.params;
+        const follow = await followService.Updated(follower_id, following_id, req.body);
         return successResponse(req, res, follow, 200);
     } catch (error) {
         return errorResponse(req, res, error.message, 500);
@@ -42,7 +44,8 @@ const update = async (req, res) => {
 
 const remove = async (req, res) => {
     try {
-        await followService.deleted(req.params.id);
+        const { follower_id, following_id } = req.params;
+        await followService.deleted(follower_id, following_id);
         return successResponse(req, res, "Seguidor eliminado exitosamente", 200);
     } catch (error) {
         return errorResponse(req, res, error.message, 500);

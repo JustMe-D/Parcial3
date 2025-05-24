@@ -1,5 +1,6 @@
 const Post = require('../models/post.models');
 const User = require('../models/user.models');
+const fs = require('fs');
 
 const created = async (data) => {
     await Post.sync();
@@ -42,7 +43,7 @@ const updateImage = async (id, file) => {
         });
     }
     const imagePath = file.path;
-    const image_url = `http://localhost:3000/images/${file.filename}`;
+    const image_url = `http://localhost:3000/images/posts/${file.filename}`;
     await Post.update({ image_url, imagePath }, { where: { id } });
     return { image_url, imagePath };
 };

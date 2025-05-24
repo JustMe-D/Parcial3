@@ -58,8 +58,8 @@ const uploadAvatar = async (req, res) => {
         const result = await userService.updateAvatar(id, file);
         return successResponse(req, res, {
             msg: "Imagen modificada correctamente",
-            user: id,
-            img: result.avatar,
+            user: result.user,
+            avatar: result.avatar,
         }, 200);
     } catch (error) {
         return errorResponse(req, res, error.message, 500);
