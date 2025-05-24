@@ -30,10 +30,28 @@ const deleted = async (id) => {
     return await Post.destroy({ where: { id } });
 }
 
+const updateImage = async (id, file) => {
+    const post = await Post.findOne({ where: { id } });
+    if (!post) {
+        throw new Error("Post no encontrado");
+    }
+    // Elimina la imagen anterior si existe
+    if (post.imagePath) {
+        fs.unlink(post.imagePath, (err) => {
+            if (err) console.error(err);
+        });
+    }
+    const imagePath = file.path;
+    const image_url = `http://localhost:3000/images/${file.filename}`;
+    await Post.update({ image_url, imagePath }, { where: { id } });
+    return { image_url, imagePath };
+};
+
 module.exports = {
     created,
     Updated,
     getAll,
     getById,
-    deleted
+    deleted,
+    updateImage
 }

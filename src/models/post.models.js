@@ -32,7 +32,7 @@ const Post = sequelize.define(
     },
     image_url: {
         type: DataTypes.TEXT,
-        allowNull: true,
+        defaultValue: "http://localhost:3000/images/image1.png",
     }
 }
 );
