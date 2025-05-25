@@ -9,6 +9,12 @@ const roles = require("../routes/role.routes");
 const users = require("../routes/user.routes");
 const auth = require("../routes/auth.routes");
 const userRoles = require("../routes/userRole.routes");
+const comments = require("../routes/comment.routes");
+const posts = require("../routes/post.routes");
+const likes = require("../routes/like.routes");
+const favorites = require("../routes/favorite.routes");
+const follows = require("../routes/follow.routes");
+
 const errors = require("../utils/error"); 
 
 const app = express();
@@ -27,6 +33,11 @@ app.use("/api/v1/roles", roles);
 app.use("/api/v1/users", users);
 app.use("/api/v1/auth", auth);
 app.use("/api/v1/user-roles", userRoles);
+app.use("/api/v1/comments", comments);
+app.use("/api/v1/posts", posts);
+app.use("/api/v1/likes", likes);
+app.use("/api/v1/favorites", favorites);
+app.use("/api/v1/follows", follows);
 app.use(errors);
 
 // Public static files

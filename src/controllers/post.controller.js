@@ -1,5 +1,5 @@
 const {successResponse, errorResponse} = require('../utils/response');
-const postService = require('../services/post.service');
+const postService = require('../services/post.services');
 
 const create = async (req, res) => {
     try {
